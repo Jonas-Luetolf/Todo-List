@@ -21,34 +21,7 @@ class ListHandler:
             f.write(json.dumps(self.data))
     
     def get_data(self):
-        return self.data
-        
-class TodoHandler:
-    def __init__(self):
-        self.lists=[]
+        return self.data["tasks"]
 
-    def add_list(self,path):
-        self.lists.append(ListHandler(path))
-
-    def get_task(self,list_name,name):
-        for i in self.lists:
-            if i.name==list_name:
-                return i.get_by_name(name)
-
-
-
-
-
-
-
-
-
-
-
-def main():
-    h=TodoHandler()
-    h.add_list("test.json")
-    print(h.get_task("test","test"))
-
-if __name__ == "__main__":
-    main()
+    def change_state(self,name,state=1):
+        self.data["tasks"][name][1]=state

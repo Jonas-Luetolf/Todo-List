@@ -1,4 +1,1 @@
-{
-"name":"test",
-"tasks":{
-	"test": ["a test task", 0]}}
+{"name": "test", "tasks": {"test": ["a test task", 1]}}
