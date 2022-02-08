@@ -1,4 +1,3 @@
-import backend
 import os
 class UI:
     def __init__(self,todo_list)->None:
@@ -27,8 +26,3 @@ class UI:
 
     def input(self):
         return input()
-
-def main():
-    ui=UI(backend.ListHandler("test.json"))
-    ui.start()
-main()

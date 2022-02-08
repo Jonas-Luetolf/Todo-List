@@ -29,7 +29,7 @@ class ArgummentParser:
         while x<len(to_parse):
             aktuell_arg=to_parse[x]
 
-            if aktuell_arg in self.commands and ret_command=None:
+            if aktuell_arg in self.commands and ret_command==None:
                 ret_command=aktuell_arg
                 x+=1
 
