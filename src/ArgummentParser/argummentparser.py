@@ -1,4 +1,3 @@
-import sys
 class ParseError(Exception):
     def __init__(self):
         super().__init__()
@@ -7,12 +6,13 @@ class ParseError(Exception):
         return "ParseError"
 
 class Flag:
-    def __init__(self,flag:str,options:int):
+    def __init__(self,flag:str,options:int,flag_symbol="-"):
         self.flag=flag
         self.options=options
+        self.symbol=flag_symbol
 
     def __str__(self):
-        return "-"*((len(self.flag)>1)+1)+self.flag
+        return self.symbol*((len(self.flag)>1)+1)+self.flag
 
 class ArgummentParser:
     def __init__(self,commands:list):
@@ -41,6 +41,6 @@ class ArgummentParser:
                         break
 
             else:
-                print(x)
+                print(to_parse[x])
                 raise ParseError
         return ret_command,ret_flags

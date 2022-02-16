@@ -1,13 +1,12 @@
 import os
 class UI:
-    def __init__(self,todo_list)->None:
-        self.todo_list=todo_list
+    def __init__(self)->None:
+        pass
 
-    def format_list(self)->str:
-        todo_data=self.todo_list.get_data()
+    def format_list(self,todo_data:dict)->str:
         ret=""
         for i in todo_data:
-            ret+=f"{i}: {self.todo_list.get_by_name(i)[0]} {self.todo_list.get_by_name(i)[1]}\n"
+            ret+=f"{i}: {i[0]}{i[1]}\n"
         
         return ret
 
@@ -16,13 +15,3 @@ class UI:
             os.system("cls")
         else:
             os.system("clear")
-
-    def start(self)->None:
-        while True:
-            self.clean()
-            print(self.format_list())
-            self.input()
-            self.todo_list.write()      
-
-    def input(self):
-        return input()

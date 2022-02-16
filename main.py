@@ -1,16 +1,28 @@
 import src.ArgummentParser.argummentparser as argummentparser
-import sys
+from sys import argv
 from src.backend import ListHandler as ListHandler
 from src.frontend import UI as UI
 def main():
-    arg_parser=argummentparser.ArgummentParser(["show"])
+    arg_parser=argummentparser.ArgummentParser(["show","add"])
     arg_parser.add_flag("list",1)
-    command,flags=arg_parser.parse(sys.argv[1:])
+
+    command,flags=arg_parser.parse(argv[1:])
+    ui=UI()
     match command:
         case "show":
             list_handler=ListHandler(flags["--list"][0])
-            ui=UI(list_handler)
-            ui.start()
-            
+            print(ui.format_list(list_handler.get_tasks()))
+    
 
-main()
+
+
+
+
+
+
+
+
+
+if __name__=="__main__":
+    main()
+
