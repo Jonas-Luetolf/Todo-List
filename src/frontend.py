@@ -3,12 +3,12 @@ class UI:
     def __init__(self)->None:
         pass
 
-    def format_list(self,todo_data:dict)->str:
+    def print_list(self,todo_data:dict)->str:
         ret=""
         for i in todo_data:
-            ret+=f"{i}: {i[0]}{i[1]}\n"
+            ret+=f"{i.name}: {i.description}, {i.state}\n"
         
-        return ret
+        print(ret)
 
     def clean(self)->None:
         if os.name=="nt":

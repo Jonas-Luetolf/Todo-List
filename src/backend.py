@@ -1,7 +1,7 @@
 import json
 import os
 from src.ArgummentParser.argummentparser import ArgummentParser
-
+from src.task import Task
 class ListHandler:
     def __init__(self,name,folder=f"{os.path.expanduser('~')}/.todo-list/"):
         self.name=name
@@ -9,33 +9,41 @@ class ListHandler:
         self.open()
         
     def open(self):
-        try:
+        if os.path.isfile(f"{self.folder}{self.name}.json"):
             with open(f"{self.folder}{self.name}.json","r") as f:
                 self.data = json.load(f)   
-        except:
-            print("exc1")
-            try:
-                os.mkdir(self.folder)
+        elif os.path.isdir(self.folder):
+            os.mkdir(self.folder)
             
-            except FileExistsError:
-                pass
-
             with open(f"{self.folder}{self.name}.json","w") as f:
                 f.write('{"tasks":{}}')
                 self.data=json.loads('{"tasks":{}}')
+        else:
+            with open(f"{self.folder}{self.name}.json","w") as f:
+                 f.write('{"tasks":{}}')
+                 self.data=json.loads('{"tasks":{}}')
 
-    def get_task(self,name:str):
-        return self.data["tasks"][name]
+        self.tasks=[]
+        for task in self.data["tasks"]:
+            self.tasks.append(Task(task,self.data["tasks"][task][0],self.data["tasks"][task][1]))
+    def get_tasks(self,state=None):
+        if state != None and type(state)!=int:
+            raise TypeError
 
-    def add_task(self,name:str,description:str,check=0):
-        self.data["tasks"].update({name:[description,check]})
-
+        if state==None:
+            return self.tasks
+        else:
+            ret=[]
+            for task in self.tasks:
+                if task.state==state:
+                    ret.append(task)
+            return ret
+        
     def write(self):
-        with open(f"{self.folder}{self.name}.json","w") as f:
-            f.write(json.dumps(self.data))
-    
-    def get_tasks(self):
-        return self.data["tasks"]
+        task_data={}
+        for i in self.tasks:
+            task_data.update(i.get_raw())
 
-    def change_state(self,name:str,state=1):
-        self.data["tasks"][name][1]=state
+        raw_str=json.dumps({"name":self.name,"tasks":task_data})
+        with open(f"{self.folder}{self.name}.json","w") as f:
+            f.write(raw_str)

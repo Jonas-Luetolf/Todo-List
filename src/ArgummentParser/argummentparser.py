@@ -37,7 +37,7 @@ class ArgummentParser:
                 for flag in self.flags:
                     if str(flag)==aktuell_arg:
                         ret_flags.update({str(flag):to_parse[x+1:x+2+flag.options]})
-                        x=x+2+flag.options
+                        x=x+1+flag.options
                         break
 
             else:
