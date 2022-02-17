@@ -1,18 +1,21 @@
-import os
+from src.layout.grid import Grid
+from src.layout.widget import Widget
 class UI:
     def __init__(self,settings)->None:
         self.settings=settings
+        self.grid=Grid()
 
-    def print_list(self,todo_data:dict)->str:
-        ret=""
-        for i in todo_data:
-            ret+=self.format_task(i)
+    def print_list(self,todo_list,state=None)->str:
+        temp=Widget(todo_list.name)
+        self.grid.clear()
+        for index,task in enumerate(todo_list.get_tasks(state)):
+            temp[index]=self.format_task(task)
 
-        print(ret)
+        print(temp)
     
     def format_task(self,task):
         if task.state==1:
             symbol=self.settings["check_symbol"]
         else:
             symbol=self.settings["open_symbol"]
-        return f"{task.name}: {task.description} {symbol}\n"
+        return f"{task.name}: {task.description} {symbol}"

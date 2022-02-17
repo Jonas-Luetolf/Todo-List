@@ -4,12 +4,12 @@ from os.path import expanduser, isfile, isdir
 from src.task import Task
 
 class ListHandler:
-    def __init__(self,name,folder):
+    def __init__(self,name:str,folder:str)->None:
         self.name=name
         self.folder=folder
         self.open()
         
-    def open(self):
+    def open(self)->None:
         if isfile(f"{self.folder}{self.name}.json"):
             with open(f"{self.folder}{self.name}.json","r") as f:
                 self.data = json.load(f)   
@@ -25,7 +25,7 @@ class ListHandler:
         for task in self.data["tasks"]:
             self.tasks.append(Task(task,self.data["tasks"][task][0],self.data["tasks"][task][1]))
     
-    def get_tasks(self,state=None):
+    def get_tasks(self,state=None)->list:
         if state != None and type(state)!=int:
             raise TypeError
 
@@ -38,7 +38,7 @@ class ListHandler:
                     ret.append(task)
             return ret
         
-    def write(self):
+    def write(self)->None:
         task_data={}
         for i in self.tasks:
             task_data.update(i.get_raw())
