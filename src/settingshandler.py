@@ -1,5 +1,5 @@
 #Copyright (c) 2022 Jonas Lütolf 
-from os.path import isfile, expanduser
+from os.path import isfile,isdir, expanduser
 from os import mkdir
 import yaml
 DEFAULTCONFIG=f"""
@@ -60,4 +60,8 @@ class SettingsHandler:
     
     @staticmethod
     def valid_settings(data:dict)->bool:
-        return False
+        ret=[]
+        ret.append(type(data["open_symbol"])==str)
+        ret.append(type(data["check_symbol"])==str)
+        ret.append(isdir(data["list_folder"]))
+        return sum(ret)==len(ret)

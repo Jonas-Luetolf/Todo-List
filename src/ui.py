@@ -3,11 +3,9 @@ from src.layout.widget import Widget
 class UI:
     def __init__(self,settings)->None:
         self.settings=settings
-        self.grid=Grid()
 
     def print_list(self,todo_list,state=None)->str:
         temp=Widget(todo_list.name)
-        self.grid.clear()
         for index,task in enumerate(todo_list.get_tasks(state)):
             temp[index]=self.format_task(task)
 
