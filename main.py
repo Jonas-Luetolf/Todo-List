@@ -7,7 +7,7 @@ from os.path import expanduser
 
 def main()->None:
     #parse argumments
-    arg_parser=ArgummentParser(["show","add"])
+    arg_parser=ArgummentParser(["show","add-task"])
     arg_parser.add_flag("list",1,"l")
     arg_parser.add_flag("state",1,"s")
     command,flags=arg_parser.parse(argv[1:])
@@ -27,7 +27,12 @@ def main()->None:
 
             list_handler=ListHandler(flags["--list"][0],settings["list_folder"])
             ui.print_list(list_handler,state)
-    
+
+        case "add-task":
+            list_handler=ListHandler(flags["--list"][0],settings["list_folder"])
+            new_task_data=ui.ask_task_informations()
+            list_handler.add_task(new_task_data["name"],new_task_data["description"],new_task_data["state"])
+            list_handler.write()   
 
 if __name__=="__main__":
     main()

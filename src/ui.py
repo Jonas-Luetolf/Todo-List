@@ -13,9 +13,13 @@ class UI:
 
         print(temp)
     
-    def format_task(self,task):
+    def format_task(self,task)->str:
         if task.state==1:
             symbol=self.settings["check_symbol"]
         else:
             symbol=self.settings["open_symbol"]
         return f"{task.name}: {task.description} {symbol}"
+
+    @staticmethod
+    def ask_task_informations()->dict:
+        return {"name":input("name: "),"description":input("description: "),"state":int(input("state(default 0)")==1)}

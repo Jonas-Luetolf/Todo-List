@@ -46,3 +46,6 @@ class ListHandler:
         raw_str=json.dumps({"name":self.name,"tasks":task_data})
         with open(f"{self.folder}{self.name}.json","w") as f:
             f.write(raw_str)
+
+    def add_task(self,name,description,state)->None:
+        self.tasks.append(Task(name,description,state))
