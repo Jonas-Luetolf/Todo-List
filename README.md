@@ -1,7 +1,7 @@
 # ToDo-List
 **Copyright (c) Jonas Lütolf 2022** <br>
 **License: MIT**<br>
-**(E-Mail)[mailto: jonas-luetolf@outlook.com]
+**E-Mail: jonas-luetolf@outlook.com**
 
 ## dependencies
 - python3.10
