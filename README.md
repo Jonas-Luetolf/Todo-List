@@ -7,8 +7,8 @@
 - python3.10
 
 ## Commands
-- show The command shows the selected List. If the list does not exist, it will be created.
-- add If the selected list exists it will add the task, else it will create the list and add the task to this list.
+- **show** The command shows the selected List. If the list does not exist, it will be created.
+- **add-task** If the selected list exists it will add the task, else it will create the list and add the task to this list.
 
 ## Flags
 - --list/-l ```list name``` (required for show and add-task) selects the list
