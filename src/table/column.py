@@ -1,21 +1,8 @@
 import math
-from dataclasses import dataclass
-
-@dataclass
-class Edge:
-    LEFTTOP="╔"
-    RIGHTTOP="╗"
-    LEFTBOTTOM="╚"
-    RIGHTBOTTOM="╝"
-    BOTTOMTOP="═"
-    LEFTRIGHT="║"
-
-
-class Widget:
+class Column:
     def __init__(self,name:str)->None:
         self.name = name
         self.lines=[]
-        self.edge=Edge()
 
     def clear(self)->None:
         self.lines=[]
@@ -37,8 +24,8 @@ class Widget:
 
     def __str__(self)->str:
         x_len=self.get_x_len()
-        ret=f"{self.edge.LEFTTOP}{self.edge.BOTTOMTOP*math.ceil((x_len-1-len(self.name))/2)}{self.name}{self.edge.BOTTOMTOP*(math.ceil((x_len-len(self.name))/2))}{self.edge.RIGHTTOP}\n"
+        ret=f"{'-'*math.ceil((x_len+1-len(self.name))/2)}{self.name}{'-'*(math.ceil((x_len-len(self.name))/2)+1)}\n"
         for i in self.lines:
-            ret+=f"{self.edge.LEFTRIGHT}{i}{' '*(x_len-len(i))}{self.edge.LEFTRIGHT}\n"
+            ret+=f"|{i}{' '*(x_len-len(i))}|\n"
 
-        return ret+self.edge.LEFTBOTTOM+self.edge.BOTTOMTOP*(x_len)+self.edge.RIGHTBOTTOM
+        return ret+"-"*(x_len+2)

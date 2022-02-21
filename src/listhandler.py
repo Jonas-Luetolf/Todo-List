@@ -25,7 +25,7 @@ class ListHandler:
         for task in self.data["tasks"]:
             self.tasks.append(Task(task,self.data["tasks"][task][0],self.data["tasks"][task][1]))
     
-    def get_tasks(self,state=None)->list:
+    def get_tasks(self,state:int=None)->list:
         if state != None and type(state)!=int:
             raise TypeError
 
@@ -47,5 +47,5 @@ class ListHandler:
         with open(f"{self.folder}{self.name}.json","w") as f:
             f.write(raw_str)
 
-    def add_task(self,name,description,state)->None:
+    def add_task(self,name:str,description:str,state:int)->None:
         self.tasks.append(Task(name,description,state))
