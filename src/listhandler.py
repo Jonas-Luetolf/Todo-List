@@ -3,6 +3,14 @@ from os import mkdir
 from os.path import expanduser, isfile, isdir
 from src.task import Task
 
+class TaskNotFound(Exception):
+    def __init__(self,mes:str=""):
+        super().__init__()
+        self.mes=mes
+    
+    def __str__(self):
+        return f"TaskNotFound: {self.mes}"
+
 class ListHandler:
     def __init__(self,name:str,folder:str)->None:
         self.name=name
@@ -49,3 +57,11 @@ class ListHandler:
 
     def add_task(self,name:str,description:str,state:int)->None:
         self.tasks.append(Task(name,description,state))
+
+    def delete_task(self,name:str)->None:
+        for index,task in enumerate(self.tasks):
+            if  task.name == name:
+                del self.tasks[index]
+                return None
+
+        raise TaskNotFound(f"Task {name} not found")

@@ -5,10 +5,12 @@ class UI:
         self.settings=settings
 
     def print_list(self,todo_list,state=None)->str:
+        #make table
         name_column=Column("Name")
         description_column=Column("Description")
         state_column=Column("State")
         table=Table()
+        
         for index,task in enumerate(todo_list.get_tasks(state)):
             name_column[index]=task.name
             description_column[index]=task.description

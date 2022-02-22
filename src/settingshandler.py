@@ -60,8 +60,8 @@ class SettingsHandler:
     
     @staticmethod
     def valid_settings(data:dict)->bool:
-        ret=[]
-        ret.append(type(data["open_symbol"])==str)
-        ret.append(type(data["check_symbol"])==str)
-        ret.append(isdir(data["list_folder"]))
-        return sum(ret)==len(ret)
+        ret:int=0
+        ret+=int(type(data["open_symbol"])==str)
+        ret+=int(type(data["check_symbol"])==str)
+        ret+=int(isdir(data["list_folder"]))
+        return ret==3
