@@ -4,11 +4,11 @@ from os.path import expanduser, isfile, isdir
 from src.task import Task
 
 class TaskNotFound(Exception):
-    def __init__(self,mes:str=""):
+    def __init__(self,mes:str="")->None:
         super().__init__()
         self.mes=mes
     
-    def __str__(self):
+    def __str__(self)->None:
         return f"TaskNotFound: {self.mes}"
 
 class ListHandler:
@@ -22,7 +22,7 @@ class ListHandler:
             with open(f"{self.folder}{self.name}.json","r") as f:
                 self.data = json.load(f)   
         else:
-            if isdir(self.folder):
+            if not isdir(self.folder):
                 mkdir(self.folder)
             
             with open(f"{self.folder}{self.name}.json","w") as f:

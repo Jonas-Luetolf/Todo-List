@@ -11,6 +11,8 @@ from sys import argv
 def main()->None:
     #parse argumments
     arg_parser=ArgummentParser(["show","add-task","delete"])
+    
+    #flags
     arg_parser.add_flag("list",1,"l")
     arg_parser.add_flag("state",1,"s")
     arg_parser.add_flag("folder",1,"f")

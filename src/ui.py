@@ -1,7 +1,7 @@
 from src.table.column import Column
 from src.table.table import Table
 class UI:
-    def __init__(self,settings)->None:
+    def __init__(self,settings:dict)->None:
         self.settings=settings
 
     def print_list(self,todo_list,state=None)->str:

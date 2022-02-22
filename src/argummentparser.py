@@ -1,12 +1,13 @@
 class ParseError(Exception):
-    def __init__(self):
+    def __init__(self,mes:str="")->None:
         super().__init__()
+        self.mes = mes
 
-    def __str__(self):
-        return "ParseError"
+    def __str__(self)->str:
+        return f"ParseError: {self.mes}"
 
 class Flag:
-    def __init__(self,flag:str,options:int,second_flag=None,flag_symbol="-"):
+    def __init__(self,flag:str,options:int,second_flag:str=None,flag_symbol:str="-")->None:
         self.flag=flag
         self.second_flag=second_flag
         self.options=options
@@ -20,15 +21,15 @@ class Flag:
         else:
             return False
 
-    def __str__(self):
+    def __str__(self)->None:
         return self.symbol*((len(self.flag)>1)+1)+self.flag
 
 class ArgummentParser:
-    def __init__(self,commands:list):
+    def __init__(self,commands:list)->None:
         self.commands=commands
         self.flags=[]
 
-    def add_flag(self,flag:str,options:int,second_flag=None):
+    def add_flag(self,flag:str,options:int,second_flag:str=None)->None:
             self.flags.append(Flag(flag,options,second_flag))
 
     def parse(self,to_parse:list):
@@ -54,6 +55,5 @@ class ArgummentParser:
                 pass
 
             else:
-                print(to_parse[x])
-                raise ParseError
+                raise ParseError("can't parse argument {to_parse[x]}")
         return ret_command,ret_flags
