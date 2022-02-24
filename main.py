@@ -10,7 +10,7 @@ from sys import argv
 
 def main()->None:
     #parse argumments
-    arg_parser=ArgummentParser(["show","add-task","delete"])
+    arg_parser=ArgummentParser(["show","add-task","delete-task"])
     
     #flags
     arg_parser.add_flag("list",1,"l")
@@ -48,7 +48,7 @@ def main()->None:
         case "add-task":
             new_task_data=ui.ask_task_informations()
             list_handler.add_task(new_task_data["name"],new_task_data["description"],new_task_data["state"])
-        case "delete":
+        case "delete-task":
             list_handler.delete_task(flags["--task"][0])
     #write list
     list_handler.write()   

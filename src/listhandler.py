@@ -34,26 +34,27 @@ class ListHandler:
             self.tasks.append(Task(task,self.data["tasks"][task][0],self.data["tasks"][task][1]))
     
     def get_tasks(self,state:int=None)->list:
-        if state != None and type(state)!=int:
+        if type(state)!=int and state!= None:
             raise TypeError
 
-        if state==None:
+        elif state==None:
             return self.tasks
+        
         else:
-            ret=[]
+            tasks_list=[]
             for task in self.tasks:
                 if task.state==state:
-                    ret.append(task)
-            return ret
+                    tasks_list.append(task)
+            return tasks_list
         
     def write(self)->None:
         task_data={}
-        for i in self.tasks:
-            task_data.update(i.get_raw())
+        for task in self.tasks:
+            task_data.update(task.get_raw())
 
         raw_str=json.dumps({"name":self.name,"tasks":task_data})
-        with open(f"{self.folder}{self.name}.json","w") as f:
-            f.write(raw_str)
+        with open(f"{self.folder}{self.name}.json","w") as file:
+            file.write(raw_str)
 
     def add_task(self,name:str,description:str,state:int)->None:
         self.tasks.append(Task(name,description,state))
