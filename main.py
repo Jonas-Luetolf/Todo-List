@@ -10,7 +10,7 @@ from sys import argv
 
 def main()->None:
     #parse argumments
-    arg_parser=ArgummentParser(["show","add-task","delete-task"])
+    arg_parser=ArgummentParser(["show","add-task","delete-task","change-state"])
     
     #flags
     arg_parser.add_flag("list",1,"l")
@@ -30,6 +30,7 @@ def main()->None:
     if "--folder" in flags:
         folder=flags["--folder"][0]
     else:
+
         folder=settings["list_folder"]
     
     #open list
@@ -50,6 +51,14 @@ def main()->None:
             list_handler.add_task(new_task_data["name"],new_task_data["description"],new_task_data["state"])
         case "delete-task":
             list_handler.delete_task(flags["--task"][0])
+
+        case "change-state":
+            if "--state" in flags:
+                state=int(flags["--state"][0])
+
+            else:
+                state=1
+            list_handler.change_state(flags["--task"][0],state)
     #write list
     list_handler.write()   
 

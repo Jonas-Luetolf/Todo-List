@@ -66,3 +66,8 @@ class ListHandler:
                 return None
 
         raise TaskNotFound(f"Task {name} not found")
+    
+    def change_state(self,name:str,state:int=1)->None:
+        for task in self.tasks:
+            if task.name == name:
+                task.state=state
