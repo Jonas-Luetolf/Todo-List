@@ -1,4 +1,5 @@
 import math
+from src.table.edge import Edge
 class Column:
     def __init__(self,name:str)->None:
         self.name = name
@@ -24,8 +25,8 @@ class Column:
 
     def __str__(self)->str:
         x_len=self.get_x_len()
-        ret=f"{'-'*math.ceil((x_len+1-len(self.name))/2)}{self.name}{'-'*(math.ceil((x_len-len(self.name))/2)+1)}\n"
+        ret=f"{Edge.LEFTTOP}{Edge.BOTTOMTOP*math.ceil((x_len-len(self.name))/2)}{self.name}{Edge.BOTTOMTOP*(math.floor((x_len-len(self.name))/2))}{Edge.RIGHTTOP}\n"
         for i in self.lines:
-            ret+=f"|{i}{' '*(x_len-len(i))}|\n"
+            ret+=f"{Edge.LEFTRIGHT}{i}{' '*(x_len-len(i))}{Edge.LEFTRIGHT}\n"
 
-        return ret+"-"*(x_len+2)
+        return ret+f"{Edge.LEFTBOTTOM}{Edge.BOTTOMTOP*(x_len)}{Edge.RIGHTBOTTOM}"

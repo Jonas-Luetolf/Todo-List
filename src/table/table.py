@@ -1,3 +1,4 @@
+from src.table.edge import Edge
 class Table:
     def __init__(self)->None:
         self.columns=[]
@@ -18,6 +19,11 @@ class Table:
                 if index>=len(lines):
                     lines+=(list("" for i in range(0,index+1-len(lines))))
                     tabs="".join(list(" "*i for i in x_lens[0:anz_columns]))
+                
+                if anz_columns!=0: 
+                    line=line.replace(Edge.LEFTTOP,Edge.TOPMIDDLE)
+                    line=line.replace(Edge.LEFTBOTTOM,Edge.BOTTOMMIDDLE)
+
                 lines[index]=lines[index][:-1]+"".join(tabs+line)
             anz_columns+=1
         ret=""
