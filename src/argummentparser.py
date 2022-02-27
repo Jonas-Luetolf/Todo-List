@@ -55,5 +55,5 @@ class ArgummentParser:
                 pass
 
             else:
-                raise ParseError("can't parse argument {to_parse[x]}")
+                raise ParseError(f"can't parse argument {to_parse[x]}")
         return ret_command,ret_flags
