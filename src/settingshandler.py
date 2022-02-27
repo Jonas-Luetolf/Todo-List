@@ -22,8 +22,10 @@ class SettingsHandler:
     def get_settings(self)->dict:
         #load config from file
         load_data=self.open_config()
+        
         if self.valid_settings(load_data):
             pass
+    
 
         #load default config
         else:
@@ -60,8 +62,11 @@ class SettingsHandler:
     
     @staticmethod
     def valid_settings(data:dict)->bool:
-        ret:int=0
-        ret+=int(type(data["open_symbol"])==str)
-        ret+=int(type(data["check_symbol"])==str)
-        ret+=int(isdir(data["list_folder"]))
-        return ret==3
+        try:
+            ret:int=0
+            ret+=int(type(data["open_symbol"])==str)
+            ret+=int(type(data["check_symbol"])==str)
+            ret+=int(isdir(data["list_folder"]))
+            return ret==3
+        except:
+            return False

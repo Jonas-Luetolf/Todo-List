@@ -16,5 +16,5 @@ setup(
     description = "a simpel todo-list",
     options = {"build_exe": build_exe_options},
     
-    executables = [Executable("main.py", base=base)]
+    executables = [Executable("todo-list.py", base=base)]
 )
