@@ -12,7 +12,7 @@ if sys.platform == "win32":
 
 setup(
     name = "todo-list",
-    version = "0.1",
+    version = "1.0",
     description = "a simpel todo-list",
     options = {"build_exe": build_exe_options},
     
