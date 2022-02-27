@@ -8,16 +8,16 @@ from src.settingshandler import SettingsHandler
 from os.path import expanduser
 from sys import argv
 
-def main()->None:
-    #parse argumments
+def parse_args()->tuple:
     arg_parser=ArgummentParser(["show","add-task","delete-task","change-state"])
-    
-    #flags
-    arg_parser.add_flag("list",1,"l")
-    arg_parser.add_flag("state",1,"s") 
-    arg_parser.add_flag("folder",1,"f")
+    arg_parser.add_flag("list",1,"l")       
+    arg_parser.add_flag("state",1,"s")      
+    arg_parser.add_flag("folder",1,"f")     
     arg_parser.add_flag("task",1,"t")   
-    command,flags=arg_parser.parse(argv[1:])
+    return arg_parser.parse(argv[1:])
+
+def main()->None:
+    command,flags=parse_args()
 
     #load settings
     settings_handler=SettingsHandler(f"{expanduser('~')}/.todo-list/config.yaml")
