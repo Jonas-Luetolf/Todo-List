@@ -8,6 +8,20 @@ from src.settingshandler import SettingsHandler
 from os.path import expanduser
 from sys import argv
 
+class NoCommandError(Exception):
+    def __init__(self):
+        super().__init__()
+
+    def __str__(self):
+        return f"NoCommandError no command found in the call"
+class FlagNotFound(Exception):
+    def __init__(self,flag_name):
+        super().__init__()
+        self.flag_name=flag_name
+
+    def __str__(self):
+        return f"FlagNotFound: falg {self.flag_name} not found"
+
 def parse_args()->tuple:
     arg_parser=ArgummentParser(["show","add-task","delete-task","change-state"])
     arg_parser.add_flag("list",1,"l")       
@@ -25,7 +39,10 @@ def main()->None:
     
     #make ui
     ui=UI(settings)
-
+    
+    if command==None:
+        raise NoCommandError()
+    
     #set folder path
     if "--folder" in flags:
         folder=flags["--folder"][0]
@@ -33,7 +50,10 @@ def main()->None:
         folder=settings["list_folder"]
     
     #open list
-    list_handler=ListHandler(flags["--list"][0],folder)
+    if "--list" in flags:
+        list_handler=ListHandler(flags["--list"][0],folder)
+    else:
+        raise FlagNotFound("--list")
 
     match command:
         case "show":
@@ -57,7 +77,11 @@ def main()->None:
                 state=int(flags["--state"][0])
             else:
                 state=1
-            list_handler.change_state(flags["--task"][0],state)
+                
+            if "--task" in flags:
+                list_handler.change_state(flags["--task"][0],state)
+            else:
+                raise FlagNotFound("--task")
     
     #write list
     list_handler.write()   
