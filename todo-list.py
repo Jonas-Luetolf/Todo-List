@@ -1,3 +1,4 @@
+#Copyright (C) 2022 Jonas Lütolf
 #imports from src
 from src.argummentparser import ArgummentParser
 from src.listhandler import ListHandler
@@ -8,12 +9,14 @@ from src.settingshandler import SettingsHandler
 from os.path import expanduser
 from sys import argv
 
+#exceptions
 class NoCommandError(Exception):
     def __init__(self):
         super().__init__()
 
     def __str__(self):
         return f"NoCommandError no command found in the call"
+
 class FlagNotFound(Exception):
     def __init__(self,flag_name):
         super().__init__()
@@ -21,6 +24,7 @@ class FlagNotFound(Exception):
 
     def __str__(self):
         return f"FlagNotFound: falg {self.flag_name} not found"
+
 
 def parse_args()->tuple:
     arg_parser=ArgummentParser(["show","add-task","delete-task","change-state"])
@@ -54,7 +58,8 @@ def main()->None:
         list_handler=ListHandler(flags["--list"][0],folder)
     else:
         raise FlagNotFound("--list")
-
+    
+    #execute command
     match command:
         case "show":
             #set state
