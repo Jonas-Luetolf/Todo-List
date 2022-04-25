@@ -56,4 +56,7 @@ class ArgummentParser:
 
             else:
                 raise ParseError(f"can't parse argument {to_parse[x]}")
+        
+        if ret_command == None:
+            raise ParseError("no command")
         return ret_command,ret_flags
