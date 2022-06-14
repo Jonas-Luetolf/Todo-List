@@ -27,15 +27,18 @@ class FlagNotFound(Exception):
 
 
 def parse_args()->tuple:
-    arg_parser=ArgummentParser(["show","add-task","delete-task","change-state"])
-    arg_parser.add_flag("list",1,"l")       
+    arg_parser=ArgummentParser()
+    arg_parser.add_command("show",1)
+    arg_parser.add_command("add-task",1)
+    arg_parser.add_command("delete-task",2)
+    arg_parser.add_command("change-state",2)
+
     arg_parser.add_flag("state",1,"s")      
     arg_parser.add_flag("folder",1,"f")     
-    arg_parser.add_flag("task",1,"t")   
     return arg_parser.parse(argv[1:])
 
 def main()->None:
-    command,flags=parse_args()
+    command,command_args,flags=parse_args()
 
     #load settings
     settings_handler=SettingsHandler(f"{expanduser('~')}/.todo-list/config.yaml")
@@ -54,10 +57,8 @@ def main()->None:
         folder=settings["list_folder"]
     
     #open list
-    if "--list" in flags:
-        list_handler=ListHandler(flags["--list"][0],folder)
-    else:
-        raise FlagNotFound("--list")
+
+    list_handler=ListHandler(command_args[0],folder)
     
     #execute command
     match command:
@@ -75,18 +76,13 @@ def main()->None:
             list_handler.add_task(new_task_data["name"],new_task_data["description"],new_task_data["state"])
         
         case "delete-task":
-            list_handler.delete_task(flags["--task"][0])
+            list_handler.delete_task(command_args[1])
 
         case "change-state":
-            if "--state" in flags:
-                state=int(flags["--state"][0])
-            else:
-                state=1
+            state=1
                 
-            if "--task" in flags:
-                list_handler.change_state(flags["--task"][0],state)
-            else:
-                raise FlagNotFound("--task")
+            list_handler.change_state(command_args[1],state)
+            
     
     #write list
     list_handler.write()   
