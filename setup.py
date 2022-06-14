@@ -1,20 +1,22 @@
-import sys
-from cx_Freeze import setup, Executable
-
-# Dependencies are automatically detected, but it might need fine tuning.
-# "packages": ["os"] is used as example only
-build_exe_options = {"packages": ["os"]}
-
-# base="Win32GUI" should be used only for Windows GUI app
-base = None
-if sys.platform == "win32":
-    base = "Win32GUI"
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
 
 setup(
-    name = "todo-list",
-    version = "2.0",
-    description = "a simpel todo-list",
-    options = {"build_exe": build_exe_options},
-    
-    executables = [Executable("todo-list.py", base=base)]
+    name="Todo-List",
+    version=2.0,
+    description='a todo-list cli',
+ 
+    author='Jonas Lütolf',
+    license='MIT',
+    url='http://github.com/Jonas-Luetolf/Todo-List',
+
+    python_requires='>=3.6',
+    install_requires=[
+        'PyYAML (>= 3.12)',
+    ],
+    package_dir={'': './'},
+    packages=['table',"todo_list"],
+    scripts=['todo-list'],
 )

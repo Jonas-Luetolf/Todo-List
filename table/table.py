@@ -1,4 +1,4 @@
-from src.table.edge import Edge
+from table.edge import Edge
 class Table:
     def __init__(self)->None:
         self.columns=[]

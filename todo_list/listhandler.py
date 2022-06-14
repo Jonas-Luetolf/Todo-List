@@ -1,7 +1,7 @@
 import json
 from os import mkdir
 from os.path import expanduser, isfile, isdir
-from src.task import Task
+from todo_list.task import Task
 
 class TaskNotFound(Exception):
     def __init__(self,mes:str="")->None:

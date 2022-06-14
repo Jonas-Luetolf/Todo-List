@@ -1,5 +1,5 @@
-from src.table.column import Column
-from src.table.table import Table
+from table.column import Column
+from table.table import Table
 class UI:
     def __init__(self,settings:dict)->None:
         self.settings=settings

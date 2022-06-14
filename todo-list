@@ -1,9 +1,10 @@
+#!/usr/bin/python3
 #Copyright (C) 2022 Jonas Lütolf
 #imports from src
-from src.argummentparser import ArgummentParser
-from src.listhandler import ListHandler
-from src.ui import UI
-from src.settingshandler import SettingsHandler
+from todo_list.argummentparser import ArgummentParser
+from todo_list.listhandler import ListHandler
+from todo_list.ui import UI
+from todo_list.settingshandler import SettingsHandler
 
 #imports from std libary
 from os.path import expanduser

@@ -1,5 +1,5 @@
 import math
-from src.table.edge import Edge
+from table.edge import Edge
 class Column:
     def __init__(self,name:str)->None:
         self.name = name
