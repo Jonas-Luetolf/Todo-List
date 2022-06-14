@@ -6,8 +6,6 @@
 ## dependencies
 - python3.10
 
-## build dependencies
-- [cx-freeze](https://github.com/marcelotduarte/cx_Freeze)
 
 ## Commands
 - **show ```list name```** The command shows the selected List. If the list does not exist, it will be created.
