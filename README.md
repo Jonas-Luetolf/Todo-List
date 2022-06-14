@@ -10,9 +10,9 @@
 - [cx-freeze](https://github.com/marcelotduarte/cx_Freeze)
 
 ## Commands
-- **show '''list name'''** The command shows the selected List. If the list does not exist, it will be created.
-- **add-task '''list name'''** If the selected list exists it will add the task, else it will create the list and add the task to this list.
-- **delete-task 'list name''' '''task name'''** The command deletes the selected Task.
+- **show ```list name```** The command shows the selected List. If the list does not exist, it will be created.
+- **add-task ```list name```** If the selected list exists it will add the task, else it will create the list and add the task to this list.
+- **delete-task ```list name``` ```taskname```** The command deletes the selected Task.
 
 ## Flags
 - **--state/-s** ```0/1``` (Optional at show) selects the state default: both
