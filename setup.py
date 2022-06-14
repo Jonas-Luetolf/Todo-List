@@ -12,7 +12,7 @@ setup(
     license='MIT',
     url='http://github.com/Jonas-Luetolf/Todo-List',
 
-    python_requires='>=3.6',
+    python_requires='>=3.10',
     install_requires=[
         'PyYAML (>= 3.12)',
     ],
