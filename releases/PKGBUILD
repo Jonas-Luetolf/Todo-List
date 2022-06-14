@@ -1,10 +1,11 @@
 pkgname=todo-list
-pkgver=1.0
-pkgrel=2
+pkgver=2.0
+pkgrel=1
 pkgdesc="a simple todo-list"
 arch=('x86_64')
 license=('MIT')
-source=("$pkgname-$pkgver-arch.tar.gz::https://github.com/Jonas-Luetolf/Todo-List/releases/download/v1.0/todo-list-1.0-arch.tar.gz")
+depends=('python>=3.10.0')
+source=("Todo-List-2.0.linux-x86_64.tar.gz::https://github.com/Jonas-Luetolf/Todo-List/releases/download/v2.0/Todo-List-2.0.linux-x86_64.tar.gz")
 sha256sums=("SKIP")
 
 package(){
